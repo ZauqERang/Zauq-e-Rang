@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Zauq e Rang – Thread Bangles Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:linear-gradient(135deg,#ff0080,#7928ca,#2afadf);
+color:white;
+}
+
+header{
+display:flex;
+align-items:center;
+padding:15px 40px;
+background:rgba(0,0,0,.4);
+}
+
+header img{
+height:60px;
+margin-right:15px;
+}
+
+nav a{
+color:white;
+margin:0 15px;
+text-decoration:none;
+font-weight:bold;
+}
+
+section{
+padding:60px 40px;
+}
+
+.hero{
+text-align:center;
+}
+
+.hero h1{
+font-size:48px;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+}
+
+.card{
+background:rgba(0,0,0,.4);
+border-radius:15px;
+padding:15px;
+text-align:center;
+}
+
+.card img{
+width:100%;
+border-radius:10px;
+}
+
+button{
+background:#ffcc00;
+border:none;
+padding:10px 20px;
+border-radius:25px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.cart{
+position:fixed;
+top:20px;
+right:20px;
+background:black;
+padding:15px;
+border-radius:10px;
+}
+
+input,textarea{
+width:100%;
+padding:10px;
+margin:8px 0;
+border-radius:10px;
+border:none;
+}
+
+footer{
+background:black;
+text-align:center;
+padding:20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<img src="logo.png">
+<h2>Zauq e Rang</h2>
+<nav>
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#shop">Shop</a>
+<a href="#gallery">Gallery</a>
+<a href="#reviews">Reviews</a>
+<a href="#blog">Blog</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
+<div class="cart">
+🛒 Cart: <span id="count">0</span>
+</div>
+
+<section id="home" class="hero">
+<h1>Color Your Style With Zauq e Rang</h1>
+<p>Handcrafted Thread Bangles – Made With Love</p>
+</section>
+
+<section id="about">
+<h2>About Us</h2>
+<p>Zauq e Rang is a colorful handmade thread bangles brand blending tradition with modern fashion. Every piece is crafted to bring elegance and joy.</p>
+</section>
+
+<section id="shop">
+<h2>Shop</h2>
+
+<div class="products">
+
+<!-- Product 1 with WhatsApp Order -->
+<div class="card">
+<img src="https://via.placeholder.com/300">
+<h3>Product 1 Name</h3>
+<p>Rs 1200</p>
+<button onclick="orderNow('Product 1 Name',1200)">Order Now</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/300">
+<h3>Pink Floral Set</h3>
+<p>Rs 1500</p>
+<button onclick="add()">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/300">
+<h3>Royal Mix</h3>
+<p>Rs 1800</p>
+<button onclick="add()">Add to Cart</button>
+</div>
+
+</div>
+</section>
+
+<section id="blog">
+<h2>Blog</h2>
+<div class="blog-post">
+<h3>The Art of Thread Bangles – Tradition Meets Style</h3>
+<p>Thread bangles are more than just accessories—they are a blend of tradition, craftsmanship, and modern style. Each bangle is meticulously handcrafted with vibrant threads, beads, and sometimes tiny embellishments, making them unique. These bangles are not only lightweight but also versatile, allowing you to pair them with traditional wear or contemporary outfits. Wearing thread bangles is like carrying a piece of culture on your wrist while expressing your personal style. Why Thread Bangles Are a Must-Have: Lightweight and comfortable for daily wear, comes in countless colors and designs, perfect for gifting during festivals and special occasions, affordable luxury without compromising style.</p>
+</div>
+<div class="blog-post">
+<h3>How to Style Thread Bangles for Every Occasion</h3>
+<p>Thread bangles are a perfect way to add a pop of color and charm to any outfit. From casual wear to festive attire, these bangles can transform your look effortlessly. Stack them with metal bangles for a fusion style or wear them alone for a minimalist chic look. Mixing colors and textures can create an eye-catching effect that complements your outfit’s vibe. Styling Tips: Pair bright thread bangles with monochrome outfits to make them stand out, mix pastel shades for a soft and elegant look, combine different widths and textures for a bold, statement look, don’t be afraid to match them with rings and anklets for a full accessory set.</p>
+</div>
+<div class="blog-post">
+<h3>The Craftsmanship Behind Every Thread Bangle</h3>
+<p>Every thread bangle tells a story of skill and dedication. Artisans spend hours wrapping colorful threads around the bangle base, adding beads, stones, and small decorative pieces. The meticulous process ensures that each bangle is not just jewelry but a piece of art. Supporting handmade thread bangles also helps preserve traditional craft techniques and supports local artisans. Why Handmade Bangles Matter: Each piece is unique; no two bangles are exactly alike, supports traditional artisans and preserves culture, eco-friendly, using threads and materials that are sustainable, adds a personal, handcrafted touch to your wardrobe.</p>
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact Us</h2>
+
+<form>
+<!-- WhatsApp Contact Button -->
+<a href="https://wa.me/923400179971" target="_blank" style="display:inline-block; background:#25D366; color:white; padding:10px 20px; border-radius:25px; text-decoration:none; font-weight:bold;">
+📱 Contact via WhatsApp
+</a>
+</form>
+
+<p>Email: zauqerangpk@gmail.com</p>
+<p>WhatsApp: +92 340 0179971</p>
+
+</section>
+
+<footer>
+© 2026 Zauq e Rang – All Rights Reserved
+</footer>
+
+<script>
+// WhatsApp Order function for Product 1
+function orderNow(productName, price){
+  let message = `Hello Zauq e Rang 🌸%0AI want to order: ${productName} - Rs.${price}%0AMy details:%0AName:%0AAddress:%0APhone:`;
+  window.open(`https://wa.me/923400179971?text=${message}`, '_blank');
+}
+
+// Cart function for other products
+let c=0;
+function add(){
+  c++;
+  document.getElementById("count").innerText=c;
+  alert("Added to cart!");
+}
+</script>
+
+</body>
+</html>
