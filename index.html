@@ -4,264 +4,1597 @@
 <meta charset="UTF-8">
 <title>Zauq e Rang – Thread Bangles Store</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-body{
-margin:0;
-font-family:Arial, sans-serif;
-background:linear-gradient(135deg,#ff0080,#7928ca,#2afadf);
-color:white;
+:root {
+  --rose: #e8547a;
+  --gold: #c9963b;
+  --deep: #1a0a12;
+  --cream: #fdf6ee;
+  --blush: #f7dde8;
+  --ink: #2d1520;
+  --muted: #8a6070;
 }
 
-header{
-display:flex;
-align-items:center;
-padding:15px 40px;
-background:rgba(0,0,0,.4);
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
 }
 
-header img{
-height:60px;
-margin-right:15px;
+/* Noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
 }
 
-nav a{
-color:white;
-margin:0 15px;
-text-decoration:none;
-font-weight:bold;
+/* ── HEADER ── */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 60px;
+  background: rgba(253,246,238,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,150,59,0.2);
+  transition: all 0.3s ease;
 }
 
-section{
-padding:60px 40px;
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
-.hero{
-text-align:center;
+.logo-img {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--gold);
 }
 
-.hero h1{
-font-size:48px;
+.logo-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.5px;
 }
 
-.products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:25px;
+.logo-text span {
+  color: var(--rose);
 }
 
-.card{
-background:rgba(0,0,0,.4);
-border-radius:15px;
-padding:15px;
-text-align:center;
+nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
 }
 
-.card img{
-width:100%;
-border-radius:10px;
+nav a {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s;
 }
 
-button{
-background:#ffcc00;
-border:none;
-padding:10px 20px;
-border-radius:25px;
-cursor:pointer;
-font-weight:bold;
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--rose);
+  transition: width 0.3s;
 }
 
-.cart{
-position:fixed;
-top:20px;
-right:20px;
-background:black;
-padding:15px;
-border-radius:10px;
+nav a:hover { color: var(--rose); }
+nav a:hover::after { width: 100%; }
+
+.nav-cta {
+  background: var(--rose);
+  color: white !important;
+  padding: 10px 22px;
+  border-radius: 50px;
+  letter-spacing: 1px !important;
+}
+.nav-cta::after { display: none; }
+.nav-cta:hover { background: #c43a64 !important; color: white !important; }
+
+/* ── HERO ── */
+#home {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 120px 60px 60px;
+  gap: 60px;
+  position: relative;
+  overflow: hidden;
 }
 
-input,textarea{
-width:100%;
-padding:10px;
-margin:8px 0;
-border-radius:10px;
-border:none;
+.hero-bg {
+  position: absolute;
+  top: -100px; right: -200px;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,84,122,0.12) 0%, transparent 70%);
+  pointer-events: none;
 }
 
-footer{
-background:black;
-text-align:center;
-padding:20px;
+.hero-bg2 {
+  position: absolute;
+  bottom: -150px; left: -100px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,150,59,0.1) 0%, transparent 70%);
+  pointer-events: none;
 }
+
+.hero-text { position: relative; z-index: 1; }
+
+.hero-badge {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 6px 16px;
+  border-radius: 50px;
+  margin-bottom: 28px;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero-text h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px;
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 24px;
+  animation: fadeUp 0.8s 0.15s ease both;
+}
+
+.hero-text h1 em {
+  font-style: italic;
+  color: var(--rose);
+}
+
+.hero-text p {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 400px;
+  margin-bottom: 40px;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.8s 0.45s ease both;
+}
+
+.btn-primary {
+  background: var(--rose);
+  color: white;
+  padding: 15px 32px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+  display: inline-block;
+}
+.btn-primary:hover { background: #c43a64; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(232,84,122,0.35); }
+
+.btn-outline {
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  padding: 14px 32px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s;
+  display: inline-block;
+}
+.btn-outline:hover { background: var(--ink); color: white; transform: translateY(-2px); }
+
+.hero-visual {
+  position: relative;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+.hero-img-wrap {
+  width: 100%;
+  aspect-ratio: 4/5;
+  border-radius: 30px 30px 120px 30px;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg, var(--blush), #f0c4d4);
+}
+
+.hero-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f7dde8, #fce4ec, #f8bbd9);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 80px;
+  color: rgba(232,84,122,0.3);
+}
+
+.hero-stats {
+  position: absolute;
+  bottom: 30px; left: -30px;
+  background: white;
+  border-radius: 16px;
+  padding: 18px 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  display: flex;
+  gap: 30px;
+}
+
+.stat { text-align: center; }
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--rose);
+  display: block;
+}
+.stat-label {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.hero-tag {
+  position: absolute;
+  top: 30px; right: -20px;
+  background: var(--gold);
+  color: white;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(201,150,59,0.35);
+  transform: rotate(3deg);
+}
+
+/* ── MARQUEE ── */
+.marquee-wrap {
+  background: var(--rose);
+  padding: 14px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-track {
+  display: inline-flex;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee-item {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: white;
+  padding: 0 40px;
+}
+
+.marquee-dot {
+  color: rgba(255,255,255,0.5);
+  margin: 0 10px;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── ABOUT ── */
+#about {
+  padding: 100px 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  background: white;
+}
+
+.about-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.about-text h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+
+.about-text h2 em {
+  font-style: italic;
+  color: var(--rose);
+}
+
+.about-text p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.9;
+  margin-bottom: 16px;
+}
+
+.about-pillars {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 36px;
+}
+
+.pillar {
+  background: var(--cream);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid rgba(201,150,59,0.15);
+}
+
+.pillar-icon { font-size: 24px; margin-bottom: 10px; }
+.pillar h4 { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+.pillar p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+.about-visual {
+  position: relative;
+}
+
+.about-img-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.about-img-box {
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  background: linear-gradient(135deg, var(--blush), #f0c4d4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  color: rgba(232,84,122,0.3);
+}
+
+.about-img-box:first-child {
+  margin-top: 40px;
+}
+
+/* ── SHOP ── */
+#shop {
+  padding: 100px 60px;
+  background: var(--cream);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.section-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 54px;
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1.15;
+}
+
+.section-header h2 em { font-style: italic; color: var(--rose); }
+.section-header p { color: var(--muted); font-size: 15px; margin-top: 14px; }
+
+/* Filter tabs */
+.filter-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+
+.filter-tab {
+  padding: 9px 22px;
+  border-radius: 50px;
+  border: 1.5px solid rgba(45,21,32,0.2);
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.filter-tab.active, .filter-tab:hover {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: white;
+}
+
+/* Products grid */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 28px;
+}
+
+.card {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  border: 1px solid rgba(232,84,122,0.08);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 70px rgba(232,84,122,0.15);
+}
+
+.card-img-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, #fce4ec, #f8bbd9);
+}
+
+.card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card:hover .card-img-wrap img { transform: scale(1.08); }
+
+.card-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  color: rgba(232,84,122,0.25);
+}
+
+.card-badge {
+  position: absolute;
+  top: 14px; left: 14px;
+  background: var(--rose);
+  color: white;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 50px;
+}
+
+.card-wishlist {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 36px; height: 36px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.card-wishlist:hover { transform: scale(1.2); }
+
+.card-body { padding: 20px; }
+
+.card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.card-subtitle {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--rose);
+}
+
+.card-price small {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.btn-order {
+  background: var(--ink);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s;
+  display: inline-block;
+}
+
+.btn-order:hover { background: var(--rose); transform: translateY(-1px); }
+
+/* ── FEATURES STRIP ── */
+.features-strip {
+  background: var(--ink);
+  padding: 60px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  text-align: center;
+}
+
+.feature-item { color: white; }
+.feature-icon { font-size: 32px; margin-bottom: 14px; }
+.feature-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.feature-desc { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+/* ── TESTIMONIALS ── */
+#testimonials {
+  padding: 100px 60px;
+  background: white;
+  text-align: center;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 60px;
+}
+
+.testimonial-card {
+  background: var(--cream);
+  border-radius: 24px;
+  padding: 32px;
+  text-align: left;
+  border: 1px solid rgba(201,150,59,0.15);
+  transition: transform 0.3s;
+}
+.testimonial-card:hover { transform: translateY(-4px); }
+
+.stars { color: var(--gold); font-size: 16px; margin-bottom: 16px; }
+
+.testimonial-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.author-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blush), #f0c4d4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.author-name { font-size: 14px; font-weight: 500; color: var(--ink); }
+.author-loc { font-size: 12px; color: var(--muted); }
+
+/* ── BLOG ── */
+#blog {
+  padding: 100px 60px;
+  background: var(--cream);
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 60px;
+}
+
+.blog-card {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.blog-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); }
+
+.blog-img {
+  height: 200px;
+  background: linear-gradient(135deg, #fce4ec, #f8bbd9, #e8cef7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+}
+
+.blog-body { padding: 24px; }
+
+.blog-tag {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--rose);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.blog-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+
+.blog-excerpt {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.blog-read {
+  font-size: 12px;
+  color: var(--rose);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+}
+
+/* ── CONTACT ── */
+#contact {
+  padding: 100px 60px;
+  background: var(--ink);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.contact-text .about-label { color: var(--gold); }
+
+.contact-text h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 300;
+  color: white;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.contact-text h2 em { font-style: italic; color: var(--rose); }
+
+.contact-text p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+
+.contact-links { display: flex; flex-direction: column; gap: 16px; }
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+.contact-link:hover { color: white; }
+
+.contact-link-icon {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.contact-form {
+  background: white;
+  border-radius: 28px;
+  padding: 40px;
+}
+
+.contact-form h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 28px;
+}
+
+.form-group { margin-bottom: 18px; }
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid rgba(45,21,32,0.12);
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--cream);
+  transition: border-color 0.3s;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus { border-color: var(--rose); }
+
+.form-group textarea { resize: vertical; min-height: 100px; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.btn-submit {
+  width: 100%;
+  background: var(--rose);
+  color: white;
+  padding: 16px;
+  border-radius: 50px;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 8px;
+}
+.btn-submit:hover { background: #c43a64; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(232,84,122,0.35); }
+
+/* WhatsApp floating */
+.whatsapp-float {
+  position: fixed;
+  bottom: 30px; right: 30px;
+  width: 58px; height: 58px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 26px;
+  box-shadow: 0 8px 25px rgba(37,211,102,0.4);
+  z-index: 200;
+  transition: all 0.3s;
+  animation: pulse-wa 2s infinite;
+}
+.whatsapp-float:hover { transform: scale(1.1); }
+
+@keyframes pulse-wa {
+  0%, 100% { box-shadow: 0 8px 25px rgba(37,211,102,0.4); }
+  50% { box-shadow: 0 8px 40px rgba(37,211,102,0.7); }
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #0e0608;
+  padding: 60px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 60px;
+  color: rgba(255,255,255,0.5);
+  font-size: 13px;
+}
+
+.footer-brand .logo-text { font-size: 24px; color: white; margin-bottom: 14px; display: block; }
+.footer-brand p { line-height: 1.8; max-width: 280px; }
+
+.footer-col h4 {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 20px;
+}
+
+.footer-col a {
+  display: block;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: color 0.3s;
+}
+.footer-col a:hover { color: var(--rose); }
+
+.footer-bottom {
+  background: #0e0608;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 20px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+}
+
+.social-links { display: flex; gap: 14px; }
+.social-link {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+.social-link:hover { background: var(--rose); transform: translateY(-2px); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  header { padding: 14px 24px; }
+  nav { gap: 16px; }
+  nav a { font-size: 11px; }
+  #home { grid-template-columns: 1fr; padding: 100px 24px 60px; }
+  .hero-visual { display: none; }
+  .hero-text h1 { font-size: 48px; }
+  #about { grid-template-columns: 1fr; padding: 60px 24px; }
+  .about-img-grid { display: none; }
+  #shop { padding: 60px 24px; }
+  .products { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .features-strip { grid-template-columns: repeat(2, 1fr); padding: 40px 24px; }
+  #testimonials { padding: 60px 24px; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  #blog { padding: 60px 24px; }
+  .blog-grid { grid-template-columns: 1fr; }
+  #contact { grid-template-columns: 1fr; padding: 60px 24px; }
+  footer { grid-template-columns: 1fr; padding: 40px 24px; gap: 32px; }
+  .footer-bottom { padding: 16px 24px; flex-direction: column; gap: 14px; }
+}
+
+/* Scroll to top */
+.scroll-top {
+  position: fixed;
+  bottom: 30px; left: 30px;
+  width: 44px; height: 44px;
+  background: white;
+  border: 1.5px solid rgba(45,21,32,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 200;
+  transition: all 0.3s;
+  opacity: 0;
+  pointer-events: none;
+}
+.scroll-top.visible { opacity: 1; pointer-events: auto; }
+.scroll-top:hover { background: var(--rose); border-color: var(--rose); color: white; transform: translateY(-3px); }
 </style>
 </head>
 
 <body>
 
-<header>
-<img src="logo.png">
-<h2>Zauq e Rang</h2>
-<nav>
-<a href="#home">Home</a>
-<a href="#about">About</a>
-<a href="#shop">Shop</a>
-<a href="#blog">Blog</a>
-<a href="#contact">Contact</a>
-</nav>
+<!-- HEADER -->
+<header id="header">
+  <div class="logo-wrap">
+    <img src="logo.png" alt="Zauq e Rang" class="logo-img" onerror="this.style.display='none'">
+    <span class="logo-text">Zauq e <span>Rang</span></span>
+  </div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#shop">Shop</a>
+    <a href="#blog">Journal</a>
+    <a href="#contact">Contact</a>
+    <a href="https://wa.me/923400179971" target="_blank" class="nav-cta">Order Now</a>
+  </nav>
 </header>
 
-<section id="home" class="hero">
-<h1>Color Your Style With Zauq e Rang</h1>
-<p>Handcrafted Thread Bangles – Made With Love</p>
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-bg2"></div>
+
+  <div class="hero-text">
+    <div class="hero-badge">✦ Handcrafted in Pakistan</div>
+    <h1>Color Your <em>Wrists,</em> Color Your World</h1>
+    <p>Handcrafted thread bangles where tradition meets modern elegance. Each piece tells a story — made with love, worn with pride.</p>
+    <div class="hero-actions">
+      <a href="#shop" class="btn-primary">Explore Collection</a>
+      <a href="#about" class="btn-outline">Our Story</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-img-wrap">
+      <img src="aur.png" alt="Featured Bangle" onerror="this.style.display='none'; this.parentElement.querySelector('.hero-img-placeholder').style.display='flex'">
+      <div class="hero-img-placeholder" style="display:none;">🌸</div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">12+</span>
+        <span class="stat-label">Designs</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">500+</span>
+        <span class="stat-label">Happy Customers</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Handmade</span>
+      </div>
+    </div>
+    <div class="hero-tag">✦ New Collection</div>
+  </div>
 </section>
 
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Handcrafted with Love</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Free Delivery on Orders Over Rs.2000</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">WhatsApp Orders Available</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">100% Handmade</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Made in Pakistan</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Handcrafted with Love</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Free Delivery on Orders Over Rs.2000</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">WhatsApp Orders Available</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">100% Handmade</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Made in Pakistan</span><span class="marquee-dot">✦</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
 <section id="about">
-<h2>About Us</h2>
-<p>Zauq e Rang is a colorful handmade thread bangles brand blending tradition with modern fashion. Every piece is crafted to bring elegance and joy.</p>
+  <div class="about-text reveal">
+    <div class="about-label">Our Story</div>
+    <h2>Tradition Woven Into <em>Every Thread</em></h2>
+    <p>Zauq e Rang was born from a deep love for color, craftsmanship, and the timeless art of thread work. We blend generations-old techniques with modern sensibility to create bangles that are more than accessories.</p>
+    <p>Each piece is meticulously handcrafted, ensuring that no two bangles are exactly alike. When you wear Zauq e Rang, you carry a piece of artistry on your wrist.</p>
+    <div class="about-pillars">
+      <div class="pillar">
+        <div class="pillar-icon">🧵</div>
+        <h4>Handcrafted</h4>
+        <p>Every bangle made by skilled hands with finest threads</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">✨</div>
+        <h4>Unique Designs</h4>
+        <p>No two pieces are identical — each is one of a kind</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🌿</div>
+        <h4>Sustainable</h4>
+        <p>Eco-conscious materials, thoughtfully sourced</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">💝</div>
+        <h4>Made with Love</h4>
+        <p>Passion and care infused into every stitch</p>
+      </div>
+    </div>
+  </div>
+  <div class="about-visual reveal">
+    <div class="about-img-grid">
+      <div class="about-img-box">
+        <img src="luxe.png" alt="" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'">
+        🌺
+      </div>
+      <div class="about-img-box">
+        <img src="RubyAura.png" alt="" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'">
+        💎
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- FEATURES STRIP -->
+<div class="features-strip">
+  <div class="feature-item reveal">
+    <div class="feature-icon">🚚</div>
+    <div class="feature-title">Nationwide Delivery</div>
+    <div class="feature-desc">We deliver across all of Pakistan. Free delivery on orders above Rs.2000</div>
+  </div>
+  <div class="feature-item reveal">
+    <div class="feature-icon">✋</div>
+    <div class="feature-title">Handmade Quality</div>
+    <div class="feature-desc">Every bangle is handcrafted with premium quality threads and materials</div>
+  </div>
+  <div class="feature-item reveal">
+    <div class="feature-icon">🔄</div>
+    <div class="feature-title">Easy Returns</div>
+    <div class="feature-desc">Not satisfied? We offer hassle-free returns within 7 days of delivery</div>
+  </div>
+  <div class="feature-item reveal">
+    <div class="feature-icon">💬</div>
+    <div class="feature-title">WhatsApp Support</div>
+    <div class="feature-desc">Order and get support directly via WhatsApp — quick and easy</div>
+  </div>
+</div>
+
+<!-- SHOP -->
 <section id="shop">
-  <h2>Shop</h2>
+  <div class="section-header reveal">
+    <div class="section-label">Our Collection</div>
+    <h2>Handpicked <em>Bangles</em> for You</h2>
+    <p>Each design is a unique expression of color, craft, and culture</p>
+  </div>
+
+  <div class="filter-tabs">
+    <button class="filter-tab active" onclick="filterCards('all', this)">All Designs</button>
+    <button class="filter-tab" onclick="filterCards('classic', this)">Classic</button>
+    <button class="filter-tab" onclick="filterCards('luxe', this)">Luxe</button>
+    <button class="filter-tab" onclick="filterCards('floral', this)">Floral</button>
+  </div>
 
   <div class="products">
 
-    <div class="card">
-      <img src="aur.png" alt="Aurora">
-      <h3>Aurora</h3>
-      <p>Rs 999</p>
-      <a class="btn" href="https://wa.me/923400179971?text=Hello! I want to order: Aurora (Price: Rs.999)" target="_blank">Order Now</a>
+    <div class="card reveal" data-category="floral">
+      <div class="card-img-wrap">
+        <img src="aur.png" alt="Aurora" onerror="this.style.display='none'">
+        <div class="card-img-placeholder">🌸</div>
+        <div class="card-badge">Bestseller</div>
+        <div class="card-wishlist" onclick="toggleWishlist(this)">🤍</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Aurora</div>
+        <div class="card-subtitle">Thread • Beaded • Handcrafted</div>
+        <div class="card-footer">
+          <div class="card-price">Rs 999 <small>/ set</small></div>
+          <a class="btn-order" href="https://wa.me/923400179971?text=Hello! I want to order: Aurora (Price: Rs.999)" target="_blank">Order →</a>
+        </div>
+      </div>
     </div>
 
-      <div class="card">
-      <img src="Blush.png" alt="Blush & Sky">
-      <h3>Blush & Sky</h3>
-      <p>Rs 999</p>
-      <a class="btn" href="https://wa.me/923400179971?text=Hello! I want to order: Blush & Sky (Price: Rs.999)" target="_blank">Order Now</a>
+    <div class="card reveal" data-category="classic">
+      <div class="card-img-wrap">
+        <img src="Blush.png" alt="Blush & Sky" onerror="this.style.display='none'">
+        <div class="card-img-placeholder">🌤️</div>
+        <div class="card-wishlist" onclick="toggleWishlist(this)">🤍</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Blush & Sky</div>
+        <div class="card-subtitle">Thread • Pastel • Handcrafted</div>
+        <div class="card-footer">
+          <div class="card-price">Rs 999 <small>/ set</small></div>
+          <a class="btn-order" href="https://wa.me/923400179971?text=Hello! I want to order: Blush & Sky (Price: Rs.999)" target="_blank">Order →</a>
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-      <img src="aurum.png" alt="Aurum">
-      <h3>Aurum</h3>
-      <p>Rs 999</p>
-      <a class="btn" href="https://wa.me/923400179971?text=Hello! I want to order: Aurum (Price: Rs.999)" target="_blank">Order Now</a>
+    <div class="card reveal" data-category="luxe">
+      <div class="card-img-wrap">
+        <img src="aurum.png" alt="Aurum" onerror="this.style.display='none'">
+        <div class="card-img-placeholder">✨</div>
+        <div class="card-badge">Premium</div>
+        <div class="card-wishlist" onclick="toggleWishlist(this)">🤍</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Aurum</div>
+        <div class="card-subtitle">Gold Thread • Luxe • Handcrafted</div>
+        <div class="card-footer">
+          <div class="card-price">Rs 999 <small>/ set</small></div>
+          <a class="btn-order" href="https://wa.me/923400179971?text=Hello! I want to order: Aurum (Price: Rs.999)" target="_blank">Order →</a>
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-      <img src="eme.png" alt="Emerald Glow">
-      <h3>Emerald Glow</h3>
-      <p>Rs 999</p>
-      <a class="btn" href="https://wa.me/923400179971?text=Hello! I want to order: Emerald Glow (Price: Rs.999)" target="_blank">Order Now</a>
+    <div class="card reveal" data-category="floral">
+      <div class="card-img-wrap">
+        <img src="eme.png" alt="Emerald Glow" onerror="this.style.display='none'">
+        <div class="card-img-placeholder">💚</div>
+        <div class="card-wishlist" onclick="toggleWishlist(this)">🤍</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Emerald Glow</div>
+        <div class="card-subtitle">Thread • Vibrant • Handcrafted</div>
+        <div class="card-footer">
+          <div class="card-price">Rs 999 <small>/ set</small></div>
+          <a class="btn-order" href="https://wa.me/923400179971?text=Hello! I want to order: Emerald Glow (Price: Rs.999)" target="_blank">Order →</a>
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-      <img src="mint.png" alt="Mint Frost">
-      <h3>Mint Frost</h3>
-      <p>Rs 999</p>
-      <a class="btn" href="https://wa.me/923400179971?text=Hello! I want to order: Mint Frost (Price: Rs.999)" target="_blank">Order Now</a>
+    <div class="card reveal" data-category="classic">
+      <div class="card-img-wrap">
+        <img src="mint.png" alt="Mint Frost" onerror="this.style.display='none'">
+        <div class="card-img-placeholder">🍃</div>
+        <div class="card-wishlist" onclick="toggleWishlist(this)">🤍</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Mint Frost</div>
+        <div class="card-subtitle">Thread • Fresh • Handcrafted</div>
+        <div class="card-footer">
+          <div class="card-price">Rs 999 <small>/ set</small></div>
+          <a class="btn-order" href="https://wa.me/923400179971?text=Hello! I want to order: Mint Frost (Price: Rs.999)" target="_blank">Order →</a>
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-      <img src="luxe.png" alt="Luxe Pearl">
-      <h3>Luxe Pearl</h3>
-      <p>Rs 999</p>
-      <a class="btn" href="https://wa.me/923400179971?text=Hello! I want to order: Luxe Pearl (Price: Rs.999)" target="_blank">Order Now</a>
+    <div class="card reveal" data-category="luxe">
+      <div class="card-img-wrap">
+        <img src="luxe.png" alt="Luxe Pearl" onerror="this.style.display='none'">
+        <div class="card-img-placeholder">🤍</div>
+        <div class="card-badge">Luxe</div>
+        <div class="card-wishlist" onclick="toggleWishlist(this)">🤍</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Luxe Pearl</div>
+        <div class="card-subtitle">Pearl Thread • Elegant • Handcrafted</div>
+        <div class="card-footer">
+          <div class="card-price">Rs 999 <small>/ set</small></div>
+          <a class="btn-order" href="https://wa.me/923400179971?text=Hello! I want to order: Luxe Pearl (Price: Rs.999)" target="_blank">Order →</a>
+        </div>
+      </div>
     </div>
 
-      <div class="card">
-      <img src="RubyAura.png" alt="RubyAura">
-      <h3>RubyAura</h3>
-      <p>Rs 999</p>
-      <a class="btn" href="https://wa.me/923400179971?text=Hello! I want to order: RubyAura (Price: Rs.999)" target="_blank">Order Now</a>
+    <div class="card reveal" data-category="floral">
+      <div class="card-img-wrap">
+        <img src="RubyAura.png" alt="Ruby Aura" onerror="this.style.display='none'">
+        <div class="card-img-placeholder">❤️</div>
+        <div class="card-badge">Bestseller</div>
+        <div class="card-wishlist" onclick="toggleWishlist(this)">🤍</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Ruby Aura</div>
+        <div class="card-subtitle">Thread • Bold • Handcrafted</div>
+        <div class="card-footer">
+          <div class="card-price">Rs 999 <small>/ set</small></div>
+          <a class="btn-order" href="https://wa.me/923400179971?text=Hello! I want to order: RubyAura (Price: Rs.999)" target="_blank">Order →</a>
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-      <img src="ver.png" alt="Verdant Gold">
-      <h3>Verdant Gold</h3>
-      <p>Rs 999</p>
-      <a class="btn" href="https://wa.me/923400179971?text=Hello! I want to order: Verdant Gold (Price: Rs.999)" target="_blank">Order Now</a>
+    <div class="card reveal" data-category="classic">
+      <div class="card-img-wrap">
+        <img src="ver.png" alt="Verdant Gold" onerror="this.style.display='none'">
+        <div class="card-img-placeholder">🌿</div>
+        <div class="card-wishlist" onclick="toggleWishlist(this)">🤍</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Verdant Gold</div>
+        <div class="card-subtitle">Thread • Nature • Handcrafted</div>
+        <div class="card-footer">
+          <div class="card-price">Rs 999 <small>/ set</small></div>
+          <a class="btn-order" href="https://wa.me/923400179971?text=Hello! I want to order: Verdant Gold (Price: Rs.999)" target="_blank">Order →</a>
+        </div>
+      </div>
     </div>
 
-     <div class="card">
-      <img src="RoyalLilac.png" alt="Royal Lilac">
-      <h3>Royal Lilac</h3>
-      <p>Rs 999</p>
-      <a class="btn" href="https://wa.me/923400179971?text=Hello! I want to order: Royal Lilac (Price: Rs.999)" target="_blank">Order Now</a>
+    <div class="card reveal" data-category="luxe">
+      <div class="card-img-wrap">
+        <img src="RoyalLilac.png" alt="Royal Lilac" onerror="this.style.display='none'">
+        <div class="card-img-placeholder">💜</div>
+        <div class="card-wishlist" onclick="toggleWishlist(this)">🤍</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Royal Lilac</div>
+        <div class="card-subtitle">Thread • Regal • Handcrafted</div>
+        <div class="card-footer">
+          <div class="card-price">Rs 999 <small>/ set</small></div>
+          <a class="btn-order" href="https://wa.me/923400179971?text=Hello! I want to order: Royal Lilac (Price: Rs.999)" target="_blank">Order →</a>
+        </div>
+      </div>
     </div>
 
-     <div class="card">
-      <img src="NoirPearl.png" alt="Noir Pearl">
-      <h3>Noir Pearl</h3>
-      <p>Rs 999</p>
-      <a class="btn" href="https://wa.me/923400179971?text=Hello! I want to order: Noir Pearl (Price: Rs.999)" target="_blank">Order Now</a>
+    <div class="card reveal" data-category="classic">
+      <div class="card-img-wrap">
+        <img src="NoirPearl.png" alt="Noir Pearl" onerror="this.style.display='none'">
+        <div class="card-img-placeholder">🖤</div>
+        <div class="card-wishlist" onclick="toggleWishlist(this)">🤍</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Noir Pearl</div>
+        <div class="card-subtitle">Thread • Minimal • Handcrafted</div>
+        <div class="card-footer">
+          <div class="card-price">Rs 999 <small>/ set</small></div>
+          <a class="btn-order" href="https://wa.me/923400179971?text=Hello! I want to order: Noir Pearl (Price: Rs.999)" target="_blank">Order →</a>
+        </div>
+      </div>
     </div>
 
-     <div class="card">
-      <img src="BlueAurora.png" alt="Blue Aurora">
-      <h3>Blue Aurora</h3>
-      <p>Rs 999</p>
-      <a class="btn" href="https://wa.me/923400179971?text=Hello! I want to order: Blue Aurora (Price: Rs.999)" target="_blank">Order Now</a>
+    <div class="card reveal" data-category="floral">
+      <div class="card-img-wrap">
+        <img src="BlueAurora.png" alt="Blue Aurora" onerror="this.style.display='none'">
+        <div class="card-img-placeholder">💙</div>
+        <div class="card-wishlist" onclick="toggleWishlist(this)">🤍</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Blue Aurora</div>
+        <div class="card-subtitle">Thread • Ocean • Handcrafted</div>
+        <div class="card-footer">
+          <div class="card-price">Rs 999 <small>/ set</small></div>
+          <a class="btn-order" href="https://wa.me/923400179971?text=Hello! I want to order: Blue Aurora (Price: Rs.999)" target="_blank">Order →</a>
+        </div>
+      </div>
     </div>
 
-     <div class="card">
-      <img src="SilverZephyr.png" alt="Silver Zephyr">
-      <h3>Silver Zephyr</h3>
-      <p>Rs 999</p>
-      <a class="btn" href="https://wa.me/923400179971?text=Hello! I want to order: Silver Zephyr (Price: Rs.999)" target="_blank">Order Now</a>
+    <div class="card reveal" data-category="luxe">
+      <div class="card-img-wrap">
+        <img src="SilverZephyr.png" alt="Silver Zephyr" onerror="this.style.display='none'">
+        <div class="card-img-placeholder">🌬️</div>
+        <div class="card-wishlist" onclick="toggleWishlist(this)">🤍</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Silver Zephyr</div>
+        <div class="card-subtitle">Silver Thread • Airy • Handcrafted</div>
+        <div class="card-footer">
+          <div class="card-price">Rs 999 <small>/ set</small></div>
+          <a class="btn-order" href="https://wa.me/923400179971?text=Hello! I want to order: Silver Zephyr (Price: Rs.999)" target="_blank">Order →</a>
+        </div>
+      </div>
     </div>
 
   </div>
 </section>
 
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-header reveal">
+    <div class="section-label">Customer Love</div>
+    <h2>What Our Customers <em>Say</em></h2>
+    <p>Real reviews from real customers across Pakistan</p>
+  </div>
+
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <div class="testimonial-text">"The quality is absolutely stunning. I ordered the Aurora set and it exceeded all my expectations. Will definitely order again!"</div>
+      <div class="testimonial-author">
+        <div class="author-avatar">👩</div>
+        <div>
+          <div class="author-name">Sana Malik</div>
+          <div class="author-loc">Lahore, Pakistan</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <div class="testimonial-text">"Gifted the Royal Lilac set to my sister on Eid and she absolutely loved it! Beautiful packaging and fast delivery too."</div>
+      <div class="testimonial-author">
+        <div class="author-avatar">👩‍🦱</div>
+        <div>
+          <div class="author-name">Ayesha Raza</div>
+          <div class="author-loc">Karachi, Pakistan</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card reveal">
+      <div class="stars">★★★★★</div>
+      <div class="testimonial-text">"Ordered 3 different sets and all of them are gorgeous. The Ruby Aura is my favorite. Very responsive on WhatsApp!"</div>
+      <div class="testimonial-author">
+        <div class="author-avatar">🧕</div>
+        <div>
+          <div class="author-name">Hira Fatima</div>
+          <div class="author-loc">Islamabad, Pakistan</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
 <section id="blog">
-<h2>Blog</h2>
-<div class="blog-post">
-<h3>The Art of Thread Bangles – Tradition Meets Style</h3>
-<p>Thread bangles are more than just accessories—they are a blend of tradition, craftsmanship, and modern style. Each bangle is meticulously handcrafted with vibrant threads, beads, and sometimes tiny embellishments, making them unique. These bangles are not only lightweight but also versatile, allowing you to pair them with traditional wear or contemporary outfits. Wearing thread bangles is like carrying a piece of culture on your wrist while expressing your personal style. Why Thread Bangles Are a Must-Have: Lightweight and comfortable for daily wear, comes in countless colors and designs, perfect for gifting during festivals and special occasions, affordable luxury without compromising style.</p>
-</div>
-<div class="blog-post">
-<h3>How to Style Thread Bangles for Every Occasion</h3>
-<p>Thread bangles are a perfect way to add a pop of color and charm to any outfit. From casual wear to festive attire, these bangles can transform your look effortlessly. Stack them with metal bangles for a fusion style or wear them alone for a minimalist chic look. Mixing colors and textures can create an eye-catching effect that complements your outfit’s vibe. Styling Tips: Pair bright thread bangles with monochrome outfits to make them stand out, mix pastel shades for a soft and elegant look, combine different widths and textures for a bold, statement look, don’t be afraid to match them with rings and anklets for a full accessory set.</p>
-</div>
-<div class="blog-post">
-<h3>The Craftsmanship Behind Every Thread Bangle</h3>
-<p>Every thread bangle tells a story of skill and dedication. Artisans spend hours wrapping colorful threads around the bangle base, adding beads, stones, and small decorative pieces. The meticulous process ensures that each bangle is not just jewelry but a piece of art. Supporting handmade thread bangles also helps preserve traditional craft techniques and supports local artisans. Why Handmade Bangles Matter: Each piece is unique; no two bangles are exactly alike, supports traditional artisans and preserves culture, eco-friendly, using threads and materials that are sustainable, adds a personal, handcrafted touch to your wardrobe.</p>
-</div>
+  <div class="section-header reveal">
+    <div class="section-label">Our Journal</div>
+    <h2>Stories of <em>Craft & Color</em></h2>
+    <p>Explore the art, culture, and style behind thread bangles</p>
+  </div>
+
+  <div class="blog-grid">
+    <div class="blog-card reveal">
+      <div class="blog-img">🧵</div>
+      <div class="blog-body">
+        <div class="blog-tag">Craftsmanship</div>
+        <div class="blog-title">The Art of Thread Bangles – Tradition Meets Style</div>
+        <div class="blog-excerpt">Thread bangles are more than accessories — they are a blend of tradition, craftsmanship, and modern style. Each is meticulously handcrafted with vibrant threads, beads, and tiny embellishments...</div>
+        <a href="#" class="blog-read">Read More →</a>
+      </div>
+    </div>
+
+    <div class="blog-card reveal">
+      <div class="blog-img">👗</div>
+      <div class="blog-body">
+        <div class="blog-tag">Style Guide</div>
+        <div class="blog-title">How to Style Thread Bangles for Every Occasion</div>
+        <div class="blog-excerpt">Thread bangles are a perfect way to add a pop of color to any outfit. From casual wear to festive attire, these bangles can transform your look effortlessly...</div>
+        <a href="#" class="blog-read">Read More →</a>
+      </div>
+    </div>
+
+    <div class="blog-card reveal">
+      <div class="blog-img">💝</div>
+      <div class="blog-body">
+        <div class="blog-tag">Artisan Story</div>
+        <div class="blog-title">The Craftsmanship Behind Every Thread Bangle</div>
+        <div class="blog-excerpt">Every thread bangle tells a story of skill and dedication. Artisans spend hours wrapping colorful threads, adding beads, stones, and small decorative pieces...</div>
+        <a href="#" class="blog-read">Read More →</a>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
-<h2>Contact Us</h2>
+  <div class="contact-text reveal">
+    <div class="about-label">Get in Touch</div>
+    <h2>Order via <em>WhatsApp</em> or Drop Us a Message</h2>
+    <p>We'd love to hear from you! Whether you have questions about our bangles or want to place a custom order, reach out and we'll get back to you quickly.</p>
 
-<form>
-<!-- WhatsApp Contact Button -->
-<a href="https://wa.me/923400179971" target="_blank" style="display:inline-block; background:#25D366; color:white; padding:10px 20px; border-radius:25px; text-decoration:none; font-weight:bold;">
-📱 Contact via WhatsApp
-</a>
-</form>
+    <div class="contact-links">
+      <a href="https://wa.me/923400179971" target="_blank" class="contact-link">
+        <div class="contact-link-icon">📱</div>
+        <span>+92 340 0179971 (WhatsApp)</span>
+      </a>
+      <a href="mailto:zauqerangpk@gmail.com" class="contact-link">
+        <div class="contact-link-icon">✉️</div>
+        <span>zauqerangpk@gmail.com</span>
+      </a>
+      <a href="#" class="contact-link">
+        <div class="contact-link-icon">📍</div>
+        <span>Pakistan — Nationwide Delivery</span>
+      </a>
+    </div>
+  </div>
 
-<p>Email: zauqerangpk@gmail.com</p>
-<p>WhatsApp: +92 340 0179971</p>
-
+  <div class="contact-form reveal">
+    <h3>Place a Custom Order</h3>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="Fatima Khan" id="cname">
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+92 300 0000000" id="cphone">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Select Bangle</label>
+      <select id="cproduct">
+        <option value="">Choose a design...</option>
+        <option>Aurora – Rs 999</option>
+        <option>Blush & Sky – Rs 999</option>
+        <option>Aurum – Rs 999</option>
+        <option>Emerald Glow – Rs 999</option>
+        <option>Mint Frost – Rs 999</option>
+        <option>Luxe Pearl – Rs 999</option>
+        <option>Ruby Aura – Rs 999</option>
+        <option>Verdant Gold – Rs 999</option>
+        <option>Royal Lilac – Rs 999</option>
+        <option>Noir Pearl – Rs 999</option>
+        <option>Blue Aurora – Rs 999</option>
+        <option>Silver Zephyr – Rs 999</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Delivery Address</label>
+      <textarea placeholder="Full address including city..." id="caddress" rows="3"></textarea>
+    </div>
+    <button class="btn-submit" onclick="sendWhatsApp()">Send Order via WhatsApp 💬</button>
+  </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-© 2026 Zauq e Rang – All Rights Reserved
+  <div class="footer-brand">
+    <span class="logo-text">Zauq e <span style="color:var(--rose)">Rang</span></span>
+    <p>Handcrafted thread bangles made with love in Pakistan. Blending tradition with modern elegance, one bangle at a time.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Quick Links</h4>
+    <a href="#home">Home</a>
+    <a href="#about">About Us</a>
+    <a href="#shop">Shop</a>
+    <a href="#blog">Journal</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="footer-col">
+    <h4>Contact</h4>
+    <a href="https://wa.me/923400179971">WhatsApp Orders</a>
+    <a href="mailto:zauqerangpk@gmail.com">Email Us</a>
+    <a href="#">Instagram</a>
+    <a href="#">Facebook</a>
+  </div>
 </footer>
 
+<div class="footer-bottom">
+  <span>© 2026 Zauq e Rang – All Rights Reserved. Made with 💗 in Pakistan.</span>
+  <div class="social-links">
+    <a href="#" class="social-link">📷</a>
+    <a href="#" class="social-link">👍</a>
+    <a href="https://wa.me/923400179971" class="social-link">💬</a>
+  </div>
+</div>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/923400179971" target="_blank" class="whatsapp-float" title="Order on WhatsApp">💬</a>
+
+<!-- Scroll Top -->
+<div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
 <script>
-// WhatsApp Order function for Product 1
-function orderNow(productName, price){
-  let message = `Hello Zauq e Rang 🌸%0AI want to order: ${productName} - Rs.${price}%0AMy details:%0AName:%0AAddress:%0APhone:`;
-  window.open(`https://wa.me/923400179971?text=${message}`, '_blank');
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Header scroll
+window.addEventListener('scroll', () => {
+  const h = document.getElementById('header');
+  h.style.boxShadow = scrollY > 50 ? '0 4px 30px rgba(0,0,0,0.1)' : 'none';
+  document.getElementById('scrollTop').classList.toggle('visible', scrollY > 400);
+});
+
+// Wishlist toggle
+function toggleWishlist(btn) {
+  btn.textContent = btn.textContent === '🤍' ? '❤️' : '🤍';
+  if (btn.textContent === '❤️') {
+    btn.style.animation = 'none';
+    btn.offsetHeight;
+    btn.style.animation = 'pulse-wa 0.3s ease';
+  }
 }
 
-// Cart function for other products
-let c=0;
-function add(){
-  c++;
-  document.getElementById("count").innerText=c;
-  alert("Added to cart!");
+// Filter tabs
+function filterCards(cat, btn) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.card').forEach(card => {
+    if (cat === 'all' || card.dataset.category === cat) {
+      card.style.display = '';
+      card.style.animation = 'fadeUp 0.4s ease both';
+    } else {
+      card.style.display = 'none';
+    }
+  });
 }
+
+// WhatsApp order form
+function sendWhatsApp() {
+  const name = document.getElementById('cname').value.trim();
+  const phone = document.getElementById('cphone').value.trim();
+  const product = document.getElementById('cproduct').value;
+  const address = document.getElementById('caddress').value.trim();
+
+  if (!name || !product) {
+    alert('Please fill in your name and select a product.');
+    return;
+  }
+
+  const msg = `Hello Zauq e Rang! 🌸%0A%0AI'd like to place an order:%0A%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Product:* ${product}%0A*Address:* ${address}`;
+  window.open(`https://wa.me/923400179971?text=${msg}`, '_blank');
+}
+
+// Stagger card animations on load
+document.querySelectorAll('.card').forEach((card, i) => {
+  card.style.animationDelay = `${i * 0.05}s`;
+});
 </script>
-
 </body>
 </html>
